@@ -12,3 +12,20 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Usuario {
+  id String @id @default(uuid())
+  nome String
+  email String @unique
+  senha String 
+  cargoId Int
+  cargo Cargo @relation(fields: [cargoId], references: [cargoId])
+}
+
+model Cargo {
+  cargoId Int @id @default(autoincrement())
+  cargo String @unique
+  dt_criacao DateTime @default(now())
+  dt_atualizacao DateTime @updatedAt()
+  usuarios Usuario[]
+}
