@@ -9,7 +9,7 @@ class CargosServices {
             const criar = await cargo.create({ data: { cargo: cargoNome } })
             return { status: `O cargo ${criar.cargo} foi cadastrado no sistema` }
         }
-        return { erro: "Erro ao cadastrar novo cargo no sistema." }
+        return { erro: "O cargo informado já está cadastrado no sistema." }
     }
     async listarCargos() {
         const cargosExistentes = await cargo.findMany()
@@ -27,12 +27,12 @@ class CargosServices {
     }
     async editarCargo(id: number, cargoNome: string) {
         const idCargo = await cargo.findFirst({ where: { cargoId: id } })
-        if(idCargo) {
+        if (idCargo) {
             const editar = await cargo.update({
                 where: { cargoId: id },
                 data: { cargo: cargoNome }
             })
-            return { 
+            return {
                 status: "Alterado como solicitado.",
                 antes: idCargo,
                 alteracao: editar
@@ -41,9 +41,10 @@ class CargosServices {
         return { erro: "Não foi encontrado nenhum cargo com esse ID." }
     }
     async deletarCargo(id: number) {
-        const idCargo = await cargo.findFirst({ where: {cargoId: id}})
-        if(idCargo) {
-            return {status: `O cargo ${idCargo.cargo} foi apagado do sistema com sucesso.`}
+        const idCargo = await cargo.findFirst({ where: { cargoId: id } })
+        if (idCargo) {
+            const apagar = await cargo.delete({ where: { cargoId: id } })
+            return { status: `O cargo ${idCargo.cargo} foi apagado do sistema com sucesso.` }
         }
         return { erro: "Não foi encontrado nenhum cargo com esse ID." }
     }
