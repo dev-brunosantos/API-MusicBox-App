@@ -8,6 +8,7 @@ interface UsuarioDados {
 }
 
 const { usuario } = Prisma
+const MsgErro = "Não existe usuário com o ID informado.";
 
 class UsuarioServices {
     async criarUsuario({ nome, email, senhaCriptografada, cargoId }: UsuarioDados) {
@@ -33,13 +34,17 @@ class UsuarioServices {
     async listarUsuarioID(id: string) {
         const usuarioId = await usuario.findFirst({ where: { id } })
         if (!usuarioId) {
-            return { erro: "Não existe usuário com o ID informado." }
+            return { erro: MsgErro }
         }
         return { usuarioId }
     }
     async editarUsuario(id: string, nome: string, email: string) {
         const usuarioId = await usuario.findFirst({ where: { id } })
         if (usuarioId) {
+            if(nome === "" || email === "") {
+                nome = usuarioId.nome
+                email = usuarioId.email
+            }
             const editar = await usuario.update({
                 where: { id },
                 data: { nome, email }
@@ -50,7 +55,7 @@ class UsuarioServices {
                 dados_atualizados: editar
             }
         }
-        return { erro: "Nenhum usuário encontrado com o ID informado." }
+        return { erro: MsgErro }
     }
     // async editarSenha(id: string, senha: string) {
     //     const usuarioId = await usuario.findFirst({ where: { id } })
@@ -69,7 +74,7 @@ class UsuarioServices {
             const apagar = await usuario.delete({ where: { id } })
             return { status: `O usuário ${apagar.nome} foi exluído do sistema.` }
         }
-        return { erro: "Nenhum usuário encontrado com o ID informado." }
+        return { erro: MsgErro }
     }
 }
 
