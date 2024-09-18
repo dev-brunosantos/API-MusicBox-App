@@ -12,6 +12,10 @@ class Usuario {
         const criar = await services.criarUsuario({nome, email, senhaCriptografada, cargoId})
         return res.json(criar)
     }
+    async listar(req: Request, res: Response) {
+        const usuarios = await services.listarUsuarios()
+        return res.json(usuarios)
+    }
 }
 
 const UsuarioController = new Usuario()
