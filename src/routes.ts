@@ -16,7 +16,7 @@ routes.post('/usuario/cadastrar', UsuarioController.criar)
 routes.get('/usuario', UsuarioController.listar)
 routes.get('/usuario/:id', UsuarioController.listarUsuarioId)
 routes.put('/usuario/editar/:id', UsuarioController.editar)
-routes.put('/usuario/editar/senha/:id', UsuarioController.editarSenha)
+// routes.put('/usuario/editar/senha/:id', UsuarioController.editarSenha)
 routes.delete('/usuario/apagar/:id', UsuarioController.apagar)
 
 export { routes }
