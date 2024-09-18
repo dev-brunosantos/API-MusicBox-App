@@ -21,6 +21,7 @@ class UsuarioServices {
                 criar
             }
         }
+        return { erro: "Usuário já cadastrado no sistema." }
     }
     async listarUsuarios() {
         const listaUsuarios = await usuario.findMany()
@@ -64,9 +65,9 @@ class UsuarioServices {
     // }
     async apagarUsuario(id: string) {
         const usuarioId = await usuario.findFirst({ where: { id } })
-        if(usuarioId) {
-            const apagar = await usuario.delete({ where: { id }})
-            return { status: `O usuário ${apagar.nome} foi exluído do sistema.`}
+        if (usuarioId) {
+            const apagar = await usuario.delete({ where: { id } })
+            return { status: `O usuário ${apagar.nome} foi exluído do sistema.` }
         }
         return { erro: "Nenhum usuário encontrado com o ID informado." }
     }
