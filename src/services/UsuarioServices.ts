@@ -41,10 +41,9 @@ class UsuarioServices {
     async editarUsuario(id: string, nome: string, email: string) {
         const usuarioId = await usuario.findFirst({ where: { id } })
         if (usuarioId) {
-            if(nome === "" || email === "") {
-                nome = usuarioId.nome
-                email = usuarioId.email
-            }
+            if(nome === "" ) { nome = usuarioId.nome }
+            if(email === "") { email = usuarioId.email }
+            
             const editar = await usuario.update({
                 where: { id },
                 data: { nome, email }
