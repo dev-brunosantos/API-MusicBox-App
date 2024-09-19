@@ -34,3 +34,5 @@ class LoginServices {
         }
     }
 }
+
+export { LoginServices }
