@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { CargosControllers } from "./controllers/CargosControllers";
 import { UsuarioController } from "./controllers/UsuarioControllers";
+import { LoginControllers } from "./controllers/LoginControllers";
 
 const routes = Router()
 
@@ -18,5 +19,8 @@ routes.get('/usuario/:id', UsuarioController.listarUsuarioId)
 routes.put('/usuario/editar/:id', UsuarioController.editar)
 // routes.put('/usuario/editar/senha/:id', UsuarioController.editarSenha) -- VERIFICAR AS CONFIGURAÇÕES DO SERVICE E DO CONTROLLER
 routes.delete('/usuario/apagar/:id', UsuarioController.apagar)
+
+// ROTAS DE LOGIN
+routes.post('./login', LoginControllers.signIn)
 
 export { routes }
