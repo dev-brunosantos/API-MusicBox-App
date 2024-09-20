@@ -21,6 +21,6 @@ routes.put('/usuario/editar/:id', UsuarioController.editar)
 routes.delete('/usuario/apagar/:id', UsuarioController.apagar)
 
 // ROTAS DE LOGIN
-routes.post('./login', LoginControllers.signIn)
+routes.post('/login', LoginControllers.signIn)
 
 export { routes }
