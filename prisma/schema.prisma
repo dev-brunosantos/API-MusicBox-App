@@ -29,3 +29,10 @@ model Cargo {
   dt_atualizacao DateTime @updatedAt()
   usuarios Usuario[]
 }
+
+model Turmas {
+  id Int @id 
+  turma String @unique
+  dt_criacao DateTime @default(now())
+  dt_atualizacao DateTime @updatedAt()
+}
