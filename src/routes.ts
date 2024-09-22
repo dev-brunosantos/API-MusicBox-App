@@ -6,7 +6,7 @@ import { LoginControllers } from "./controllers/LoginControllers";
 // IMPORTAÇÃO DE MIDDLEWARES
 import { validarFormulario } from "./middlewares/validarFormulario";
 import { validarAutenticacao } from "./middlewares/validarAutenticacao";
-
+import { validarCargo } from "./middlewares/validarCargo";
 
 const routes = Router()
 
@@ -15,7 +15,7 @@ routes.post('/cargos/criar', validarFormulario, CargosControllers.criar)
 routes.get('/cargos', CargosControllers.listar)
 routes.get('/cargos/:id', CargosControllers.listarId)
 routes.put('/cargos/editar/:id', validarFormulario, CargosControllers.editar)
-routes.delete('/cargos/apagar/:id', CargosControllers.apagar)
+routes.delete('/cargos/apagar/:id', validarAutenticacao, validarCargo, CargosControllers.apagar)
 
 // ROTAS DE USUÁRIOS 
 routes.post('/usuario/cadastrar', validarFormulario, UsuarioController.criar)
