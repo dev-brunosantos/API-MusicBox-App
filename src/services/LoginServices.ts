@@ -20,7 +20,12 @@ class LoginServices {
         const senhaDescriptografada = await compare(senha, emailUsuario.senha);
         if (!senhaDescriptografada) return { erro: "Senha incorreta." };
 
-        const token = sign({ id: emailUsuario.id, email: emailUsuario.email }, JWT_SECRET as string, { expiresIn: '2h' });
+        const token = sign(
+            { id: emailUsuario.id, email: emailUsuario.email },
+            JWT_SECRET as string,
+            { subject: emailUsuario.id, expiresIn: '2h' }
+        );
+        console.log(token)
         return { emailUsuario, token };
     }
 }
