@@ -1,9 +1,7 @@
 import { sign } from 'jsonwebtoken';
 import { compare } from 'bcrypt';
 import { Prisma } from "../config/prisma";
-import dotenv from 'dotenv';
 
-dotenv.config()
 const { JWT_SECRET } = process.env;
 const { usuario } = Prisma;
 
@@ -22,10 +20,9 @@ class LoginServices {
 
         const token = sign(
             { id: emailUsuario.id, email: emailUsuario.email },
-            JWT_SECRET as string,
+            JWT_SECRET,
             { subject: emailUsuario.id, expiresIn: '2h' }
         );
-        console.log(token)
         return { emailUsuario, token };
     }
 }

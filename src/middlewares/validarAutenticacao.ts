@@ -1,34 +1,25 @@
 import { Request, Response, NextFunction } from "express";
 import { verify } from 'jsonwebtoken';
 
-const { SECRET_KEY } = process.env
+const { JWT_SECRET } = process.env
 
 interface Payload {
     sub: string;
 }
 
 export function validarAutenticacao(req: Request, res: Response, next: NextFunction) {
-    const autenticacao = req.headers.authorization
-    if(!autenticacao) {
-        return res.status(401).json({ erro: "Usuário não autenticado!"}).end()
-    }
+    
+    const autorizacao = req.headers.authorization;
 
-    const [, token] = autenticacao.split(' ')
+    if(!autorizacao) { return res.status(401).end() }
 
-    if (!token) {
-        // return res.status(401).json({ erro: "Token mal formatado!" });
-        return res.status(401).end()
-    }
+    const [, token] = autorizacao.split(" ")
 
     try {
-        // Verificar e decodificar o token
-        const { sub } = verify(token, SECRET_KEY) as Payload;
-
+        const { sub } = verify(token, JWT_SECRET) as Payload
         req.usuario_id = sub;
-        
-        //req.user = decoded; // Se quiser adicionar informações do usuário no request
         return next();
     } catch (error) {
-        return res.status(401).json({ erro: "Token inválido!" });
+        return res.status(401).end()
     }
 }
