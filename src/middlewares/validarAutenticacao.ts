@@ -17,7 +17,7 @@ export function validarAutenticacao(req: Request, res: Response, next: NextFunct
 
     try {
         // Verificar e decodificar o token
-        const decoded = verify(token, SECRET_KEY as string);
+        const decoded = verify(token, SECRET_KEY);
         //req.user = decoded; // Se quiser adicionar informações do usuário no request
         return next();
     } catch (error) {
