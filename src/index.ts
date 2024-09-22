@@ -1,8 +1,5 @@
-
-import dotenv from "dotenv";
 import { app } from "./app";
 
-dotenv.config()
 const { LINK, PORT } = process.env
 
 const link = LINK 

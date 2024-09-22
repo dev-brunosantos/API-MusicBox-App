@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import { hash } from 'bcrypt';
 import { UsuarioServices } from "../services/UsuarioServices";
 
-
 const services = new UsuarioServices();
 
 class Usuario {
