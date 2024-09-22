@@ -11,20 +11,19 @@ import { validarCargo } from "./middlewares/validarCargo";
 const routes = Router()
 
 // ROTAS DE CONTROLE DE CARGOS
-routes.post('/cargos/criar', validarFormulario, CargosControllers.criar)
-routes.get('/cargos', CargosControllers.listar)
-routes.get('/cargos/:id', CargosControllers.listarId)
-routes.put('/cargos/editar/:id', validarFormulario, CargosControllers.editar)
+routes.post('/cargos/criar', validarAutenticacao, validarCargo, validarFormulario, CargosControllers.criar)
+routes.get('/cargos', validarAutenticacao,  CargosControllers.listar)
+routes.get('/cargos/:id', validarAutenticacao,  CargosControllers.listarId)
+routes.put('/cargos/editar/:id', validarAutenticacao, validarCargo, validarFormulario, CargosControllers.editar)
 routes.delete('/cargos/apagar/:id', validarAutenticacao, validarCargo, CargosControllers.apagar)
 
 // ROTAS DE USUÁRIOS 
-routes.post('/usuario/cadastrar', validarFormulario, UsuarioController.criar)
+routes.post('/usuario/cadastrar', validarAutenticacao, validarCargo, validarFormulario, UsuarioController.criar)
 routes.get('/usuario', validarAutenticacao, UsuarioController.listar)
-// routes.get('/usuario', UsuarioController.listar)
-routes.get('/usuario/:id', UsuarioController.listarUsuarioId)
-routes.put('/usuario/editar/:id', validarFormulario, UsuarioController.editar)
+routes.get('/usuario/:id', validarAutenticacao, UsuarioController.listarUsuarioId)
+routes.put('/usuario/editar/:id', validarAutenticacao, validarCargo, validarFormulario, UsuarioController.editar)
 // routes.put('/usuario/editar/senha/:id', UsuarioController.editarSenha) -- VERIFICAR AS CONFIGURAÇÕES DO SERVICE E DO CONTROLLER
-routes.delete('/usuario/apagar/:id', UsuarioController.apagar)
+routes.delete('/usuario/apagar/:id', validarAutenticacao, validarCargo, UsuarioController.apagar)
 
 // ROTAS DE LOGIN
 routes.post('/login', validarFormulario, LoginControllers.signIn)
