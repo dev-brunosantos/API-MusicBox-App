@@ -1,9 +1,9 @@
-import { app } from "./app";
+import { app } from './app';
 
-const { LINK, PORT } = process.env
+const { LINK, PORT } = process.env;
 
-const link = LINK 
-const port = PORT 
-const url = `${link}:${port}`
+const link = LINK;
+const port = PORT;
+const url = `${link}:${port}`;
 
-app.listen(port, () => console.log(`Servidor rodando em: ${url}`))
+app.listen(port, () => console.log(`Servidor rodando em: ${url}`));
