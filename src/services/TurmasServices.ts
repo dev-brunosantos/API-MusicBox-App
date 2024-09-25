@@ -49,8 +49,16 @@ class TurmasServices {
                 data: { turma },
             });
         }
-
         return { erro: MsgErro };
+    }
+    async apagarTurma(id: number) {
+        const excluirTurma = await turmas.delete({ where: { id } });
+        if (!excluirTurma) {
+            return { erro: MsgErro };
+        }
+        return {
+            status: `A turma ${excluirTurma.turma} foi excluída do sistema com sucesso.`,
+        };
     }
 }
 
