@@ -14,25 +14,45 @@ datasource db {
 }
 
 model Usuario {
-  id String @id @default(uuid())
-  nome String
-  email String @unique
-  senha String 
-  cargoId Int
-  cargo Cargo @relation(fields: [cargoId], references: [cargoId])
+  id        String      @id @default(uuid())
+  nome      String
+  email     String      @unique
+  senha     String
+  cargoId   Int
+  cargo     Cargo       @relation(fields: [cargoId], references: [cargoId])
+  aluno     Aluno[]
+  professor Professor[]
+}
+
+model Aluno {
+  id_aluno       String   @id @default(uuid())
+  cargoId        Int
+  dt_criacao     DateTime @default(now())
+  dt_atualizacao DateTime @updatedAt()
+
+  usuario Usuario @relation(fields: [id_aluno], references: [id])
+}
+
+model Professor {
+  id_professor   String   @id @default(uuid())
+  cargoId        Int
+  dt_criacao     DateTime @default(now())
+  dt_atualizacao DateTime @updatedAt()
+  usuario        Usuario  @relation(fields: [id_professor], references: [id])
 }
 
 model Cargo {
-  cargoId Int @id @default(autoincrement())
-  cargo String @unique
-  dt_criacao DateTime @default(now())
-  dt_atualizacao DateTime @updatedAt()
-  usuarios Usuario[]
+  cargoId        Int       @id @default(autoincrement())
+  cargo          String    @unique
+  dt_criacao     DateTime  @default(now())
+  dt_atualizacao DateTime  @updatedAt()
+  usuarios       Usuario[]
 }
 
 model Turmas {
-  id Int @id 
-  turma String @unique
-  dt_criacao DateTime @default(now())
+  id             Int      @id
+  turma          String   @unique
+  professor      String?
+  dt_criacao     DateTime @default(now())
   dt_atualizacao DateTime @updatedAt()
 }
