@@ -7,7 +7,7 @@ interface UsuarioDados {
     cargoId: number;
 }
 
-const { usuario } = Prisma;
+const { usuario, aluno, professor } = Prisma;
 const MsgErro = 'Não existe usuário com o ID informado.';
 
 class UsuarioServices {
@@ -17,11 +17,30 @@ class UsuarioServices {
             const criar = await usuario.create({
                 data: { nome, email, senha: senhaCriptografada, cargoId },
             });
+
+            if (cargoId === 3) {
+                const criarAluno = await aluno.create({
+                    data: {
+                        id_aluno: criar.id
+                    }
+                })
+            }
+            
+            if (cargoId === 2) {
+                const criarProfessor = await professor.create({
+                    data: {
+                        id_professor: criar.id
+                    }
+                })
+            }
+
             return {
                 status: 'Usuario cadastrado com sucesso.',
                 criar,
             };
         }
+
+
         return { erro: 'Usuário já cadastrado no sistema.' };
     }
     async listarUsuarios() {
