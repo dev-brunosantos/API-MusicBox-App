@@ -19,28 +19,24 @@ class UsuarioServices {
             });
 
             if (cargoId === 3) {
-                const criarAluno = await aluno.create({
+                await aluno.create({
                     data: {
                         id_aluno: criar.id
                     }
                 })
             }
-            
             if (cargoId === 2) {
-                const criarProfessor = await professor.create({
+                await professor.create({
                     data: {
                         id_professor: criar.id
                     }
                 })
             }
-
             return {
                 status: 'Usuario cadastrado com sucesso.',
                 criar,
             };
         }
-
-
         return { erro: 'Usuário já cadastrado no sistema.' };
     }
     async listarUsuarios() {
@@ -92,6 +88,16 @@ class UsuarioServices {
     // }
     async apagarUsuario(id: string) {
         const usuarioId = await usuario.findFirst({ where: { id } });
+        const alunoId = await aluno.findFirst({ where: { id_aluno: id}})
+        const professorId = await professor.findFirst({ where: { id_professor: id}})
+
+        if(alunoId) {
+            await aluno.delete({ where: { id_aluno: id}})
+        }
+        if(professorId) {
+            await professor.delete({ where: { id_professor: id}})
+        }
+
         if (usuarioId) {
             const apagar = await usuario.delete({ where: { id } });
             return { status: `O usuário ${apagar.nome} foi exluído do sistema.` };
