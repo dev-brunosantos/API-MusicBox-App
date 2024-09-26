@@ -12,11 +12,11 @@ const routesLogin = Router();
 // ROTAS DE LOGIN
 routesLogin.post('/login', validarFormulario, LoginControllers.signIn);
 
-const rotas = {
+const routes = {
     routesLogin,
     routesTurmas,
     routesCargos,
     routesUsuario,
 };
 
-export { rotas };
+export { routes };
