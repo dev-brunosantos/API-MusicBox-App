@@ -13,6 +13,9 @@ const MsgErro =
 class TurmasServices {
     async criarTurma({ id, turma }: TurmasDados) {
         const turmaExistente = await turmas.findFirst({ where: { turma } });
+        if (id === turmaExistente.id) {
+            return { erro: "O ID já esta vinculado a outra turma." }
+        }
         if (!turmaExistente) {
             const novaTurma = await turmas.create({
                 data: { id, turma },
@@ -41,13 +44,15 @@ class TurmasServices {
     async editarTurma({ id, turma }: TurmasDados) {
         const idTurma = await turmas.findFirst({ where: { id } });
         if (idTurma) {
-            if (turma === '') {
-            } // DEPOIS DEVO CONTINUAR COM A LÓGICA DESSA LINHA
-
             const edicao = await turmas.update({
                 where: { id },
                 data: { turma },
             });
+            return {
+                status: "Alterações realizadas com sucesso.",
+                dadosAntigos: idTurma,
+                dadosAtualizados: edicao
+            }
         }
         return { erro: MsgErro };
     }
