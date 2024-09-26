@@ -5,7 +5,8 @@ const services = new TurmasServices();
 
 class Turmas {
     async novaTurma(req: Request, res: Response) {
-        const { id, turma } = req.body;
+        const { turma } = req.body;
+        const id = Math.floor(Math.random()*50000) + 1
         const criar = await services.criarTurma({ id, turma });
         return res.json(criar);
     }
