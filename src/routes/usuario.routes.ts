@@ -6,19 +6,19 @@ import { validarFormulario } from '../middlewares/validarFormulario';
 import { validarAutenticacao } from '../middlewares/validarAutenticacao';
 import { validarCargo } from '../middlewares/validarCargo';
 
-const routes = Router();
+const routesUsuario = Router();
 
 // ROTAS DE USUÁRIOS
-routes.post(
+routesUsuario.post(
     '/usuario/cadastrar',
     validarAutenticacao,
     validarCargo,
     validarFormulario,
     UsuarioController.criar
 );
-routes.get('/usuario', validarAutenticacao, UsuarioController.listar);
-routes.get('/usuario/:id', validarAutenticacao, UsuarioController.listarUsuarioId);
-routes.put(
+routesUsuario.get('/usuario', validarAutenticacao, UsuarioController.listar);
+routesUsuario.get('/usuario/:id', validarAutenticacao, UsuarioController.listarUsuarioId);
+routesUsuario.put(
     '/usuario/editar/:id',
     validarAutenticacao,
     validarCargo,
@@ -26,9 +26,11 @@ routes.put(
     UsuarioController.editar
 );
 // routes.put('/usuario/editar/senha/:id', UsuarioController.editarSenha) -- VERIFICAR AS CONFIGURAÇÕES DO SERVICE E DO CONTROLLER
-routes.delete(
+routesUsuario.delete(
     '/usuario/apagar/:id',
     validarAutenticacao,
     validarCargo,
     UsuarioController.apagar
 );
+
+export { routesUsuario }

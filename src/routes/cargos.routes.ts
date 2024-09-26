@@ -6,28 +6,30 @@ import { validarFormulario } from '../middlewares/validarFormulario';
 import { validarAutenticacao } from '../middlewares/validarAutenticacao';
 import { validarCargo } from '../middlewares/validarCargo';
 
-const routes = Router();
+const routesCargos = Router();
 
 // ROTAS DE CONTROLE DE CARGOS
-routes.post(
+routesCargos.post(
     '/cargos/criar',
     validarAutenticacao,
     validarCargo,
     validarFormulario,
     CargosControllers.criar
 );
-routes.get('/cargos', validarAutenticacao, CargosControllers.listar);
-routes.get('/cargos/:id', validarAutenticacao, CargosControllers.listarId);
-routes.put(
+routesCargos.get('/cargos', validarAutenticacao, CargosControllers.listar);
+routesCargos.get('/cargos/:id', validarAutenticacao, CargosControllers.listarId);
+routesCargos.put(
     '/cargos/editar/:id',
     validarAutenticacao,
     validarCargo,
     validarFormulario,
     CargosControllers.editar
 );
-routes.delete(
+routesCargos.delete(
     '/cargos/apagar/:id',
     validarAutenticacao,
     validarCargo,
     CargosControllers.apagar
 );
+
+export { routesCargos }
