@@ -26,7 +26,6 @@ model Usuario {
 
 model Aluno {
   id_aluno       String   @id @default(uuid())
-  cargoId        Int
   dt_criacao     DateTime @default(now())
   dt_atualizacao DateTime @updatedAt()
 
@@ -35,7 +34,6 @@ model Aluno {
 
 model Professor {
   id_professor   String   @id @default(uuid())
-  cargoId        Int
   dt_criacao     DateTime @default(now())
   dt_atualizacao DateTime @updatedAt()
   usuario        Usuario  @relation(fields: [id_professor], references: [id])
