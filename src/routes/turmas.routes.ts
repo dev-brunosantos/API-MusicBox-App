@@ -32,4 +32,4 @@ routesTurmas.delete(
     TurmasControllers.apagarTurma
 );
 
-export { routesTurmas }
+export { routesTurmas };

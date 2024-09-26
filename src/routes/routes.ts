@@ -16,9 +16,7 @@ const rotas = {
     routesLogin,
     routesTurmas,
     routesCargos,
-    routesUsuario
-}
+    routesUsuario,
+};
 
 export { rotas };
-
-

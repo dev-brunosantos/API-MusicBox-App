@@ -33,4 +33,4 @@ routesUsuario.delete(
     UsuarioController.apagar
 );
 
-export { routesUsuario }
+export { routesUsuario };

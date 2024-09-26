@@ -32,4 +32,4 @@ routesCargos.delete(
     CargosControllers.apagar
 );
 
-export { routesCargos }
+export { routesCargos };
