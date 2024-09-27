@@ -20,12 +20,11 @@ routesUsuario.get('/usuario', validarAutenticacao, UsuarioController.listar);
 routesUsuario.get('/usuario/:id', validarAutenticacao, UsuarioController.listarUsuarioId);
 routesUsuario.put(
     '/usuario/editar/:id',
-    validarAutenticacao,
-    validarCargo,
+    validarAutenticacao, validarCargo,
     validarFormulario,
     UsuarioController.editar
 );
-routesUsuario.patch('/usuario/editar/senha/:id', UsuarioController.editarSenha)
+routesUsuario.patch('/usuario/editar/senha/:id', validarAutenticacao, UsuarioController.editarSenha)
 routesUsuario.delete(
     '/usuario/apagar/:id',
     validarAutenticacao,
