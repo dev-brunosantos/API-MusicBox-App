@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -29,7 +23,8 @@ model Aluno {
   dt_criacao     DateTime @default(now())
   dt_atualizacao DateTime @updatedAt()
 
-  usuario Usuario @relation(fields: [id_aluno], references: [id])
+  usuario   Usuario     @relation(fields: [id_aluno], references: [id])
+  pagamento Pagamento[]
 }
 
 model Professor {
@@ -53,4 +48,17 @@ model Turmas {
   professor      String?
   dt_criacao     DateTime @default(now())
   dt_atualizacao DateTime @updatedAt()
+
+  pagamento Pagamento[]
+}
+
+model Pagamento {
+  id_pag     String @id @default(uuid())
+  id_aluno   String
+  nome_aluno String
+  id_turma   Int
+  dt_pag     DateTime @default(now())
+
+  aluno Aluno  @relation(fields: [id_aluno], references: [id_aluno])
+  turma Turmas @relation(fields: [id_turma], references: [id])
 }
