@@ -75,17 +75,18 @@ class UsuarioServices {
         }
         return { erro: MsgErro };
     }
-    // async editarSenha(id: string, senha: string) {
-    //     const usuarioId = await usuario.findFirst({ where: { id } })
-    //     if (usuarioId) {
-    //         const editar = await usuario.update({
-    //             where: { id },
-    //             data: { senha }
-    //         })
-    //         return { status: "A senha do usuário foi editada com sucesso." }
-    //     }
-    //     return { erro: "Nenhum usuário encontrado com o ID informado." }
-    // }
+    async editarSenha(id: string, senha: string) {
+        const usuarioId = await usuario.findFirst({ where: { id } })
+        
+        if (usuarioId) {
+            await usuario.update({
+                where: { id },
+                data: { senha }
+            })
+            return { status: "A senha do usuário foi editada com sucesso." }
+        }
+        return { erro: MsgErro }
+    }
     async apagarUsuario(id: string) {
         const usuarioId = await usuario.findFirst({ where: { id } });
         const alunoId = await aluno.findFirst({ where: { id_aluno: id}})

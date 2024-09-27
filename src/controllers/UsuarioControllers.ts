@@ -33,12 +33,13 @@ class Usuario {
         const editarUsuario = await services.editarUsuario(id, nome, email);
         return res.json(editarUsuario);
     }
-    // async editarSenha(req: Request, res: Response) {
-    //     const { id } = req.params
-    //     const { senha } = req.body
-    //     const novaSenha = await services.editarSenha(id, senha)
-    //     return res.json(novaSenha)
-    // }
+    async editarSenha(req: Request, res: Response) {
+        const { id } = req.params
+        const { senha } = req.body
+        const senhaCriptografada = await hash(senha, 10);
+        const novaSenha = await services.editarSenha(id, senhaCriptografada)
+        return res.json(novaSenha)
+    }
     async apagar(req: Request, res: Response) {
         const { id } = req.params;
         const apagarUsuario = await services.apagarUsuario(id);

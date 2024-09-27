@@ -25,7 +25,7 @@ routesUsuario.put(
     validarFormulario,
     UsuarioController.editar
 );
-// routes.put('/usuario/editar/senha/:id', UsuarioController.editarSenha) -- VERIFICAR AS CONFIGURAÇÕES DO SERVICE E DO CONTROLLER
+routesUsuario.patch('/usuario/editar/senha/:id', UsuarioController.editarSenha)
 routesUsuario.delete(
     '/usuario/apagar/:id',
     validarAutenticacao,
