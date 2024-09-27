@@ -50,10 +50,11 @@ model Turmas {
   dt_atualizacao DateTime @updatedAt()
 
   pagamento Pagamento[]
+  aulas     Aulas[]
 }
 
 model Pagamento {
-  id_pag     String @id @default(uuid())
+  id_pag     String   @id @default(uuid())
   id_aluno   String
   nome_aluno String
   id_turma   Int
@@ -61,4 +62,13 @@ model Pagamento {
 
   aluno Aluno  @relation(fields: [id_aluno], references: [id_aluno])
   turma Turmas @relation(fields: [id_turma], references: [id])
+}
+
+model Aulas {
+  id_aula    String @id @default(uuid())
+  id_aluno   String
+  nome_aluno String
+  turma_id   Int
+
+  turma Turmas @relation(fields: [turma_id], references: [id])
 }
