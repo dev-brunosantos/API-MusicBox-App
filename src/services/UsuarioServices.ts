@@ -12,7 +12,12 @@ const MsgErro = 'Não existe usuário com o ID informado.';
 
 class UsuarioServices {
     async criarUsuario({ nome, email, senhaCriptografada, cargoId }: UsuarioDados) {
-        const usuaroExistente = await usuario.findFirst({ where: { email } });
+        const usuaroExistente = await usuario.findFirst({ 
+            where: { email },
+            select: {
+                id: true, nome: true, email: true
+            } 
+        });
         if (!usuaroExistente) {
             const criar = await usuario.create({
                 data: { nome, email, senha: senhaCriptografada },

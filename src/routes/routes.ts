@@ -3,8 +3,8 @@ import { LoginControllers } from '../controllers/LoginControllers';
 
 // IMPORTAÇÃO DE MIDDLEWARES
 import { validarFormulario } from '../middlewares/validarFormulario';
-import { routesTurmas } from './turmas.routes';
-import { routesCargos } from './cargos.routes';
+// import { routesTurmas } from './turmas.routes';
+// import { routesCargos } from './cargos.routes';
 import { routesUsuario } from './usuario.routes';
 
 const routesLogin = Router();
@@ -14,8 +14,8 @@ routesLogin.post('/login', validarFormulario, LoginControllers.signIn);
 
 const routes = {
     routesLogin,
-    routesTurmas,
-    routesCargos,
+    // routesTurmas,
+    // routesCargos,
     routesUsuario,
 };
 

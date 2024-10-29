@@ -9,7 +9,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 app.use(routes.routesLogin);
 app.use(routes.routesUsuario);
-app.use(routes.routesCargos);
-app.use(routes.routesTurmas);
+// app.use(routes.routesCargos);
+// app.use(routes.routesTurmas);
 
 export { app };
