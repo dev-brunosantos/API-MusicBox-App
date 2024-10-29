@@ -7,7 +7,7 @@ interface UsuarioDados {
     cargoId: number;
 }
 
-const { usuario, aluno, professor } = Prisma;
+const { usuario } = Prisma;
 const MsgErro = 'Não existe usuário com o ID informado.';
 
 class UsuarioServices {
@@ -15,23 +15,9 @@ class UsuarioServices {
         const usuaroExistente = await usuario.findFirst({ where: { email } });
         if (!usuaroExistente) {
             const criar = await usuario.create({
-                data: { nome, email, senha: senhaCriptografada, cargoId },
+                data: { nome, email, senha: senhaCriptografada },
             });
 
-            if (cargoId === 3) {
-                await aluno.create({
-                    data: {
-                        id_aluno: criar.id
-                    }
-                })
-            }
-            if (cargoId === 2) {
-                await professor.create({
-                    data: {
-                        id_professor: criar.id
-                    }
-                })
-            }
             return {
                 status: 'Usuario cadastrado com sucesso.',
                 criar,
@@ -89,15 +75,6 @@ class UsuarioServices {
     }
     async apagarUsuario(id: string) {
         const usuarioId = await usuario.findFirst({ where: { id } });
-        const alunoId = await aluno.findFirst({ where: { id_aluno: id}})
-        const professorId = await professor.findFirst({ where: { id_professor: id}})
-
-        if(alunoId) {
-            await aluno.delete({ where: { id_aluno: id}})
-        }
-        if(professorId) {
-            await professor.delete({ where: { id_professor: id}})
-        }
 
         if (usuarioId) {
             const apagar = await usuario.delete({ where: { id } });
