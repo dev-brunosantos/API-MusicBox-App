@@ -17,7 +17,7 @@ routesUsuario.post(
     UsuarioController.criar
 );
 routesUsuario.get('/usuario', /*validarAutenticacao,*/ UsuarioController.listar);
-routesUsuario.get('/usuario/:id', validarAutenticacao, UsuarioController.listarUsuarioId);
+routesUsuario.get('/usuario/:id', /*validarAutenticacao,*/ UsuarioController.listarUsuarioId);
 routesUsuario.put(
     '/usuario/editar/:id',
     // validarAutenticacao, 
@@ -25,7 +25,7 @@ routesUsuario.put(
     validarFormulario,
     UsuarioController.editar
 );
-routesUsuario.patch('/usuario/editar/senha/:id', validarAutenticacao, UsuarioController.editarSenha)
+routesUsuario.patch('/usuario/editar/senha/:id', /*validarAutenticacao,*/ UsuarioController.editarSenha)
 routesUsuario.delete(
     '/usuario/apagar/:id',
     // validarAutenticacao,
