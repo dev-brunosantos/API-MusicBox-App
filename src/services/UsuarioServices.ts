@@ -18,28 +18,25 @@ class UsuarioServices {
                 data: { nome, email, senha: senhaCriptografada },
             });
 
-            return {
-                status: 'Usuario cadastrado com sucesso.',
-                criar,
-            };
+            return 'Usuario cadastrado com sucesso.';
         }
-        return { erro: 'Usuário já cadastrado no sistema.' };
+        return 'Usuário já cadastrado no sistema.';
     }
     async listarUsuarios() {
         const listaUsuarios = await usuario.findMany({
             select: { id: true, nome: true, email: true } 
         });
         if (!listaUsuarios) {
-            return { erro: 'Não existe nenhum usuário cadastrado no sistema.' };
+            return 'Não existe nenhum usuário cadastrado no sistema.';
         }
-        return { listaUsuarios };
+        return listaUsuarios;
     }
     async listarUsuarioID(id: string) {
         const usuarioId = await usuario.findFirst({ where: { id } });
         if (!usuarioId) {
-            return { erro: MsgErro };
+            return MsgErro;
         }
-        return { usuarioId };
+        return usuarioId;
     }
     async editarUsuario(id: string, nome: string, email: string) {
         const usuarioId = await usuario.findFirst({ where: { id } });
@@ -71,7 +68,7 @@ class UsuarioServices {
                 where: { id },
                 data: { senha }
             })
-            return { status: "A senha do usuário foi editada com sucesso." }
+            return "A senha do usuário foi editada com sucesso.";
         }
         return { erro: MsgErro }
     }
@@ -80,9 +77,9 @@ class UsuarioServices {
 
         if (usuarioId) {
             const apagar = await usuario.delete({ where: { id } });
-            return { status: `O usuário ${apagar.nome} foi exluído do sistema.` };
+            return `O usuário ${apagar.nome} foi exluído do sistema.`;
         }
-        return { erro: MsgErro };
+        return MsgErro;
     }
 }
 
