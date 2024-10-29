@@ -32,7 +32,10 @@ class UsuarioServices {
         return listaUsuarios;
     }
     async listarUsuarioID(id: string) {
-        const usuarioId = await usuario.findFirst({ where: { id } });
+        const usuarioId = await usuario.findFirst({ 
+            where: { id },
+            select: { id: true, nome: true, email: true }  
+        });
         if (!usuarioId) {
             return MsgErro;
         }
