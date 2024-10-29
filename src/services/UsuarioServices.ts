@@ -12,12 +12,7 @@ const MsgErro = 'Não existe usuário com o ID informado.';
 
 class UsuarioServices {
     async criarUsuario({ nome, email, senhaCriptografada, cargoId }: UsuarioDados) {
-        const usuaroExistente = await usuario.findFirst({ 
-            where: { email },
-            select: {
-                id: true, nome: true, email: true
-            } 
-        });
+        const usuaroExistente = await usuario.findFirst({ where: { email } });
         if (!usuaroExistente) {
             const criar = await usuario.create({
                 data: { nome, email, senha: senhaCriptografada },
@@ -31,7 +26,9 @@ class UsuarioServices {
         return { erro: 'Usuário já cadastrado no sistema.' };
     }
     async listarUsuarios() {
-        const listaUsuarios = await usuario.findMany();
+        const listaUsuarios = await usuario.findMany({
+            select: { id: true, nome: true, email: true } 
+        });
         if (!listaUsuarios) {
             return { erro: 'Não existe nenhum usuário cadastrado no sistema.' };
         }

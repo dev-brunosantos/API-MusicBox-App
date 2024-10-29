@@ -17,8 +17,6 @@ class Usuario {
         return res.json(criar);
     }
     async listar(req: Request, res: Response) {
-        const usuarioId = req.usuario_id;
-        console.log('Id do usuário: ', usuarioId);
         const usuarios = await services.listarUsuarios();
         return res.json(usuarios);
     }
