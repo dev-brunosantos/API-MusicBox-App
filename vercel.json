@@ -16,8 +16,5 @@
             "src": "/(.*)",
             "dest": "dist/index.js"
         }
-    ],
-    "scripts": {
-        "build": "prisma generate && tsc"
-    }
+    ]
 }
