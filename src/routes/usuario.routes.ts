@@ -11,7 +11,7 @@ const routesUsuario = Router();
 // ROTAS DE USUÁRIOS
 routesUsuario.post(
     '/usuario/cadastrar',
-    validarAutenticacao,
+    // validarAutenticacao,
     validarCargo,
     validarFormulario,
     UsuarioController.criar

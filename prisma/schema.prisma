@@ -19,63 +19,63 @@ model Usuario {
   nome      String
   email     String      @unique
   senha     String
-  cargoId   Int
-  cargo     Cargo       @relation(fields: [cargoId], references: [cargoId])
-  aluno     Aluno[]
-  professor Professor[]
+  // cargoId   Int
+  // cargo     Cargo       @relation(fields: [cargoId], references: [cargoId])
+  // aluno     Aluno[]
+  // professor Professor[]
 }
 
-model Aluno {
-  id_aluno       String   @id @default(uuid())
-  dt_criacao     DateTime @default(now())
-  dt_atualizacao DateTime @updatedAt()
+// model Aluno {
+//   id_aluno       String   @id @default(uuid())
+//   dt_criacao     DateTime @default(now())
+//   dt_atualizacao DateTime @updatedAt()
 
-  usuario   Usuario     @relation(fields: [id_aluno], references: [id])
-  pagamento Pagamento[]
-}
+//   usuario   Usuario     @relation(fields: [id_aluno], references: [id])
+//   pagamento Pagamento[]
+// }
 
-model Professor {
-  id_professor   String   @id @default(uuid())
-  dt_criacao     DateTime @default(now())
-  dt_atualizacao DateTime @updatedAt()
-  usuario        Usuario  @relation(fields: [id_professor], references: [id])
-}
+// model Professor {
+//   id_professor   String   @id @default(uuid())
+//   dt_criacao     DateTime @default(now())
+//   dt_atualizacao DateTime @updatedAt()
+//   usuario        Usuario  @relation(fields: [id_professor], references: [id])
+// }
 
-model Cargo {
-  cargoId        Int       @id @default(autoincrement())
-  cargo          String    @unique
-  dt_criacao     DateTime  @default(now())
-  dt_atualizacao DateTime  @updatedAt()
-  usuarios       Usuario[]
-}
+// model Cargo {
+//   cargoId        Int       @id @default(autoincrement())
+//   cargo          String    @unique
+//   dt_criacao     DateTime  @default(now())
+//   dt_atualizacao DateTime  @updatedAt()
+//   usuarios       Usuario[]
+// }
 
-model Turmas {
-  id             Int      @id
-  turma          String   @unique
-  professor      String?
-  dt_criacao     DateTime @default(now())
-  dt_atualizacao DateTime @updatedAt()
+// model Turmas {
+//   id             Int      @id
+//   turma          String   @unique
+//   professor      String?
+//   dt_criacao     DateTime @default(now())
+//   dt_atualizacao DateTime @updatedAt()
 
-  pagamento Pagamento[]
-  aulas     Aulas[]
-}
+//   pagamento Pagamento[]
+//   aulas     Aulas[]
+// }
 
-model Pagamento {
-  id_pag     String   @id @default(uuid())
-  id_aluno   String
-  nome_aluno String
-  id_turma   Int
-  dt_pag     DateTime @default(now())
+// model Pagamento {
+//   id_pag     String   @id @default(uuid())
+//   id_aluno   String
+//   nome_aluno String
+//   id_turma   Int
+//   dt_pag     DateTime @default(now())
 
-  aluno Aluno  @relation(fields: [id_aluno], references: [id_aluno])
-  turma Turmas @relation(fields: [id_turma], references: [id])
-}
+//   aluno Aluno  @relation(fields: [id_aluno], references: [id_aluno])
+//   turma Turmas @relation(fields: [id_turma], references: [id])
+// }
 
-model Aulas {
-  id_aula    String @id @default(uuid())
-  id_aluno   String
-  nome_aluno String
-  turma_id   Int
+// model Aulas {
+//   id_aula    String @id @default(uuid())
+//   id_aluno   String
+//   nome_aluno String
+//   turma_id   Int
 
-  turma Turmas @relation(fields: [turma_id], references: [id])
-}
+//   turma Turmas @relation(fields: [turma_id], references: [id])
+// }
